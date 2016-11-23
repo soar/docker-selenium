@@ -25,8 +25,12 @@ RUN mkdir -p /opt/selenium
 ADD ./selenium/selenium-server-standalone-3.0.1.jar /opt/selenium/selenium-server-standalone.jar
 
 # Additional parameters
+ENV XVFB_PARAMS ""
+ENV XVFB_SERVER_ARGS "-screen 0 800x600x24"
+ENV SELENIUM_CLIARGS ""
 ENV SELENIUM_PARAMS ""
 
 # Startup
 EXPOSE 4444
-CMD xvfb-run -a --server-args='-screen 0 800x600x24' java -jar /opt/selenium/selenium-server-standalone.jar ${SELENIUM_PARAMS}
+CMD xvfb-run -a ${XVFB_PARAMS} --server-args="${XVFB_SERVER_ARGS}" \
+    java ${SELENIUM_CLIARGS} -jar /opt/selenium/selenium-server-standalone.jar ${SELENIUM_PARAMS}
