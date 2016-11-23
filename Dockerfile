@@ -10,8 +10,10 @@ RUN apt-get update \
 RUN apt-get update \
 	&& apt-get -yqq install \
 		firefox \
+		fontconfig \
 		fonts-ipafont-gothic \
 		openjdk-9-jre-headless \
+		phantomjs \
 		xfonts-cyrillic \
 		xfonts-scalable \
 		xfonts-75dpi \
