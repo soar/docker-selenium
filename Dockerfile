@@ -13,7 +13,6 @@ RUN apt-get update \
 		fontconfig \
 		fonts-ipafont-gothic \
 		openjdk-9-jre-headless \
-		phantomjs \
 		xfonts-cyrillic \
 		xfonts-scalable \
 		xfonts-75dpi \
@@ -25,6 +24,9 @@ RUN apt-get update \
 RUN mkdir -p /opt/selenium
 ADD ./selenium/selenium-server-standalone-3.0.1.jar /opt/selenium/selenium-server-standalone.jar
 
+# Additional parameters
+ENV SELENIUM_PARAMS ""
+
 # Startup
 EXPOSE 4444
-CMD xvfb-run -a --server-args='-screen 0 800x600x24' java -jar /opt/selenium/selenium-server-standalone.jar -debug -log /var/log/selenium.log
+CMD xvfb-run -a --server-args='-screen 0 800x600x24' java -jar /opt/selenium/selenium-server-standalone.jar ${SELENIUM_PARAMS}
